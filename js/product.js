@@ -4,6 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const productContent = document.getElementById('product-content');
     const productError = document.getElementById('product-error');
 
+    let toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        toastContainer.className = 'fixed top-4 right-4 z-50 flex flex-col space-y-2';
+        document.body.appendChild(toastContainer);
+    }
 
     // Product details elements
     const productImage = document.getElementById('product-image');
