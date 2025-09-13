@@ -379,17 +379,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const heartClass = isInWishlist ? 'text-red-500' : 'text-gray-400';
 
         card.innerHTML = `
-        <a href="product.html?id=${product.id}" class="h-full"> 
-            <div class="product-image-container relative">
-                     <img src="${product.image}" alt="${product.title}" class="product-image">
+        <div class="product-image-container relative">
+        <a href="product.html?id=${product.id}" class="h-full relative z-[222]"> 
+            <img src="${product.image}" alt="${product.title}" class="product-image">
+            </a> 
                      
-                     <button class="wishlist-btn absolute top-2 right-2 p-1 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100 transition-all" data-id="${product.id}">
-                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ${heartClass}" fill="${heartFill}" viewBox="0 0 24 24" stroke="currentColor">
+                     <button class="wishlist-btn absolute z-[2222222222] top-2 right-2 p-1 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100 transition-all" data-id="${product.id}">
+                     <svg xmlns="http://www.w3.org/2000/svg" class=" h-7 w-7 ${heartClass}" fill="${heartFill}" viewBox="0 0 24 24" stroke="currentColor">
                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                      </svg>
                      </button>
                      </div>
-                     </a>
             <div class="p-4">
                 <div class="flex justify-between items-start mb-2">
                     <span class="category-badge">${product.category}</span>
