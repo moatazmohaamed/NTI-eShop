@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const API_URL = 'https://fakestoreapi.com';
+
 
 
     const productsContainer = document.getElementById("products-container");
@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
         toastContainer.className = 'fixed top-4 right-4 z-50 flex flex-col space-y-2';
         document.body.appendChild(toastContainer);
     }
+
+    const API_URL = 'https://fakestoreapi.com';
 
     let allProducts = [];
     let filteredProducts = [];
