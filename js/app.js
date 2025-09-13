@@ -133,7 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         const prevButton = document.createElement('button');
-        prevButton.className = `pagination-button ${currentPage === 1 ? 'disabled' : ''}`;
+        prevButton.className = `pagination-button !text-black ${currentPage === 1 ? 'disabled' : ''}`;
+        prevButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>`;
         prevButton.disabled = currentPage === 1;
         prevButton.addEventListener('click', () => {
             if (currentPage > 1) {
@@ -153,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         for (let i = startPage; i <= endPage; i++) {
             const pageButton = document.createElement('button');
-            pageButton.className = `pagination-button ${i === currentPage ? 'active' : ''}`;
+            pageButton.className = `pagination-button  ${i === currentPage ? 'active' : ''}`;
             pageButton.textContent = i;
             pageButton.addEventListener('click', () => {
                 if (i !== currentPage) {
@@ -165,7 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         const nextButton = document.createElement('button');
-        nextButton.className = `pagination-button ${currentPage === totalPages ? 'disabled' : ''}`;
+        nextButton.className = `pagination-button !text-black  ${currentPage === totalPages ? 'disabled' : ''}`;
+        nextButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
         nextButton.disabled = currentPage === totalPages;
         nextButton.addEventListener('click', () => {
             if (currentPage < totalPages) {
