@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="bg-gray-50">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="home.html" class="text-2xl font-bold text-indigo-600">eShop</a>
+                <nav class=" md:flex space-x-8">
+                    <a href="home.html" class="text-gray-800 hover:text-indigo-600">Home</a>
+                    <a href="index.html" class="text-gray-800 hover:text-indigo-600">Products</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="wishlist.html" class="relative p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span id="wishlist-count"
+                            class="absolute top-0 right-0 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                    <a href="cart.html" class="relative p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span id="cart-count"
+                            class="absolute top-0 right-0 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        
+        <div class="bg-indigo-700 rounded-lg shadow-xl overflow-hidden mb-8">
+            <div class="md:flex">
+                <div class="p-8 md:p-12 md:w-1/2 flex flex-col justify-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Welcome to eShop</h2>
+                    <p class="text-indigo-100 mb-6">Discover our latest products with amazing deals and discounts.</p>
+                    <a href="index.html"
+                        class="inline-block bg-white text-indigo-700 font-semibold px-6 py-3 rounded-md hover:bg-indigo-50 transition duration-200 w-max">Shop
+                        Now</a>
+                </div>
+                <div class="md:w-1/2 relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-700 to-transparent md:hidden"></div>
+                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                        alt="Shopping" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Featured Products</h2>
+                <a href="index.html" class="text-indigo-600 hover:text-indigo-800 font-medium">View All</a>
+            </div>
+
+            
+            <div id="featured-loading" class="py-12 flex justify-center">
+                <svg class="animate-spin h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                    </circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+            </div>
+
+            
+            <div id="featured-error" class="py-12 text-center hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500 mx-auto mb-4" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 class="text-xl font-medium text-gray-700 mb-2">Something went wrong</h2>
+                <p class="text-gray-500">Please try again later</p>
+            </div>
+
+            
+            <div id="featured-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            </div>
+        </div>
+        </div>
+
+        
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Shop by Category</h2>
+            <div id="categories-container" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-xl font-bold mb-4">eShop</h2>
+                    <p class="text-gray-400">Your one-stop shop for all things online.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-lg font-medium mb-4">Shop</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="text-gray-400 hover:text-white">All Products</a></li>
+                            <li><a href="index.html" class="text-gray-400 hover:text-white">Featured</a></li>
+                            <li><a href="index.html" class="text-gray-400 hover:text-white">New Arrivals</a></li>
+                            <li><a href="index.html" class="text-gray-400 hover:text-white">Discounted</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium mb-4">Support</h3>
+                        <ul class="space-y-2">
+                            <li><a href="home.html" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                            <li><a href="home.html" class="text-gray-400 hover:text-white">FAQs</a></li>
+                            <li><a href="home.html" class="text-gray-400 hover:text-white">Shipping</a></li>
+                            <li><a href="home.html" class="text-gray-400 hover:text-white">Returns</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2023 eShop. All rights reserved.</p>
+                <div class="mt-4 md:mt-0">
+                    <a href="home.html" class="text-gray-400 hover:text-white mx-2">Privacy Policy</a>
+                    <a href="home.html" class="text-gray-400 hover:text-white mx-2">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="../js/home.js"></script>
+</body>
+
+</html>

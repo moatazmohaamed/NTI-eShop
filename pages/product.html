@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="bg-gray-50 ">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="home.html" class="text-2xl font-bold text-indigo-600">eShop</a>
+                <nav class=" md:flex space-x-8">
+                    <a href="home.html" class="text-gray-600 hover:text-indigo-600">Home</a>
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600">Products</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="wishlist.html" class="relative p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span id="wishlist-count"
+                            class="absolute top-0 right-0 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                    <a href="cart.html" class="relative p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span id="cart-count"
+                            class="absolute top-0 right-0 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <nav class="flex mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="home.html" class="text-gray-700 hover:text-indigo-600">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <a id="product-category" href="index.html"
+                            class="ml-1 text-gray-700 hover:text-indigo-600 md:ml-2">Products</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span id="product-title" class="ml-1 text-gray-500 md:ml-2 font-medium">Product Title</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <div id="product-container">
+            <div id="product-loading" class="py-12 text-center">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600">
+                </div>
+                <p class="mt-2 text-gray-600">Loading product details...</p>
+            </div>
+
+            <div id="product-error" class="py-12 text-center hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500 mx-auto mb-4" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 class="text-xl font-medium text-gray-700 mb-2">Error Loading Product</h2>
+                <p class="text-gray-500 mb-6">We couldn't load the product details. Please try again later.</p>
+                <a href="index.html"
+                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Back to Products
+                </a>
+            </div>
+
+            <div id="product-content" class="hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                        <img id="product-image" src="" alt="Product Image" class="max-h-80 object-contain">
+                    </div>
+                    <div>
+                        <h1 id="product-name" class="text-2xl font-bold text-gray-900 mb-2">Product Name</h1>
+                        <div class="flex items-center mb-4">
+                            <div id="product-rating" class="flex mr-2"></div>
+                            <span id="product-review-count" class="text-sm text-gray-500">(0 reviews)</span>
+                        </div>
+                        <div class="mb-6">
+                            <span id="product-price" class="text-2xl font-bold text-indigo-600">$0.00</span>
+                        </div>
+                        <div class="mb-6">
+                            <h2 class="text-lg font-medium text-gray-900 mb-2">Description</h2>
+                            <p id="product-description" class="text-gray-700">Product description loading...</p>
+                        </div>
+                        <div class="mb-6">
+                            <h2 class="text-lg font-medium text-gray-900 mb-2">Quantity</h2>
+                            <div class="flex items-center">
+                                <button id="decrease-quantity" class="bg-gray-200 px-3 py-1 rounded-l-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M20 12H4" />
+                                    </svg>
+                                </button>
+                                <input id="quantity" type="number" min="1" value="1"
+                                    class="w-16 text-center border-gray-200 focus:ring-indigo-500 focus:border-indigo-500">
+                                <button id="increase-quantity" class="bg-gray-200 px-3 py-1 rounded-r-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2 mb-4">
+                            <button id="add-to-cart"
+                                class="flex-grow bg-indigo-600 text-white py-3 px-6 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                </svg>
+                                Add to Cart
+                            </button>
+                            <button id="add-to-wishlist"
+                                class="flex-none bg-white border border-gray-300 text-gray-700 py-3 px-4 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex items-center justify-center ">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                                Add to Wishlist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast-container" class="fixed top-7 right-4 z-50 flex flex-col space-y-2"></div>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-xl font-bold mb-4">eShop</h2>
+                    <p class="text-gray-400">Your one-stop shop for all things online.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-lg font-medium mb-4">Shop</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="text-gray-400 hover:text-white">All Products</a></li>
+                            <li><a href="index.html" class="text-gray-400 hover:text-white">Featured</a></li>
+                            <li><a href="index.html" class="text-gray-400 hover:text-white">New Arrivals</a></li>
+                            <li><a href="index.html" class="text-gray-400 hover:text-white">Discounted</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium mb-4">Support</h3>
+                        <ul class="space-y-2">
+                            <li><a href="home.html" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                            <li><a href="home.html" class="text-gray-400 hover:text-white">FAQs</a></li>
+                            <li><a href="home.html" class="text-gray-400 hover:text-white">Shipping</a></li>
+                            <li><a href="home.html" class="text-gray-400 hover:text-white">Returns</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2023 eShop. All rights reserved.</p>
+                <div class="mt-4 md:mt-0">
+                    <a href="home.html" class="text-gray-400 hover:text-white mx-2">Privacy Policy</a>
+                    <a href="home.html" class="text-gray-400 hover:text-white mx-2">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/product.js"></script>
+</body>
+
+</html>

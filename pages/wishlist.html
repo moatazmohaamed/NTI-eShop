@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist </title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="bg-gray-50">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="home.html" class="text-2xl font-bold text-indigo-600">eShop</a>
+                <nav class=" md:flex space-x-8">
+                    <a href="home.html" class="text-gray-600 hover:text-indigo-600">Home</a>
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600">Products</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="wishlist.html" class="relative p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span id="wishlist-count"
+                            class="absolute top-0 right-0 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </a>
+                    <a href="cart.html" class="relative p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span id="cart-count"
+                            class="absolute top-0 right-0 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 h-screen">
+        <h1 class="text-2xl font-bold text-gray-900 mb-8">Your Wishlist</h1>
+
+        
+        <div id="empty-wishlist" class="hidden py-12 text-center h-screen">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mx-auto mb-4" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            <h2 class="text-xl font-medium text-gray-700 mb-2">Your wishlist is empty</h2>
+            <p class="text-gray-500 mb-6">Looks like you haven't added any products to your wishlist yet.</p>
+            <a href="index.html"
+                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Browse Products
+            </a>
+        </div>
+
+        
+        <div id="wishlist-content" class="hidden ">
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="p-6">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Wishlist Items</h2>
+                    <div id="wishlist-items" class="divide-y divide-gray-200"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2">eShop</h3>
+                    <p class="text-gray-400">Your one-stop shop for quality products.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-medium mb-2">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="home.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Products</a></li>
+                        <li><a href="cart.html" class="text-gray-400 hover:text-white">Cart</a></li>
+                        <li><a href="wishlist.html" class="text-gray-400 hover:text-white">Wishlist</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2023 eShop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/wishlist.js"></script>
+</body>
+
+</html>
