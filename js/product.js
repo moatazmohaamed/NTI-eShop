@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showToast(message, type = 'info') {
         const toast = document.createElement('div');
-        let bgColor, iconSvg;
+        let bgColor;
 
         switch (type) {
             case 'success':
@@ -250,30 +250,33 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'warning':
                 bgColor = 'bg-yellow-500';
                 break;
-            default:
                 bgColor = 'bg-blue-500';
         }
 
-        toast.className = `${bgColor} text-white p-3 rounded-md shadow-md flex items-center mb-3 animate-fade-in`;
+        toast.className = `${bgColor} text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2 transform transition-all duration-300 translate-y-0 opacity-0`;
         toast.innerHTML = `
-            <div class="mr-2">${iconSvg}</div>
-            <div>${message}</div>
+            <div class="flex-1">${message}</div>
         `;
 
         toastContainer.appendChild(toast);
 
         setTimeout(() => {
-            toast.classList.add('animate-fade-out');
+            toast.classList.remove('translate-y-0', 'opacity-0');
+        }, 10);
+
+        setTimeout(() => {
+            toast.classList.add('translate-y-2', 'opacity-0');
             setTimeout(() => {
-                if (toastContainer.contains(toast)) {
+                if (toast.parentNode === toastContainer) {
                     toastContainer.removeChild(toast);
                 }
             }, 300);
         }, 3000);
     }
 
+
     function showAddedToCartMessage() {
-        showToast('Added to cart!', 'success');
+        showToast('Product added to cart!', 'success');
     }
 
     function toggleWishlist(product) {
