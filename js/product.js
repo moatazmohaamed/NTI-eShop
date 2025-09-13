@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM elements
+
     const productLoading = document.getElementById('product-loading');
     const productContent = document.getElementById('product-content');
     const productError = document.getElementById('product-error');
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(toastContainer);
     }
 
-    // Product details elements
+
     const productImage = document.getElementById('product-image');
     const productName = document.getElementById('product-name');
     const productRating = document.getElementById('product-rating');
@@ -22,14 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const productCategory = document.getElementById('product-category');
     const productTitle = document.getElementById('product-title');
 
-    // Quantity controls
+
     const decreaseQuantityBtn = document.getElementById('decrease-quantity');
     const increaseQuantityBtn = document.getElementById('increase-quantity');
     const quantityInput = document.getElementById('quantity');
     const addToCartBtn = document.getElementById('add-to-cart');
     const addToWishlistBtn = document.getElementById('add-to-wishlist');
 
-    const API_URL = 'https://fakestoreapi.com';
     const productId = getURLParameter('id');
     init();
     updateCartCount();
@@ -61,13 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const roundedRating = Math.round(rating * 2) / 2;
 
         for (let i = 1; i <= maxRating; i++) {
-            if (i <= roundedRating) {
-                starsHTML += `<svg class="w-4 h-4 star filled" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`;
-            } else if (i - 0.5 <= roundedRating) {
-                starsHTML += `<svg class="w-4 h-4 star filled" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" clip-path="inset(0 50% 0 0)"></path></svg>`;
-            } else {
-                starsHTML += `<svg class="w-4 h-4 star" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`;
-            }
+            if (i <= roundedRating) {} else if (i - 0.5 <= roundedRating) {} else {}
         }
 
         return starsHTML;
@@ -95,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
             cartCount.textContent = totalItems;
 
-            // Show/hide based on count
             if (totalItems === 0) {
                 cartCount.classList.add('hidden');
             } else {
@@ -121,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalItems = wishlistItems.length;
             wishlistCount.textContent = totalItems;
 
-            // Show/hide based on count
             if (totalItems === 0) {
                 wishlistCount.classList.add('hidden');
             } else {
@@ -130,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Main Functions
     async function init() {
         if (!productId) {
             showError('Product ID is missing');
@@ -138,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            // Fetch product details
             const product = await fetchFromAPI(`/products/${productId}`);
             renderProduct(product);
             setupEventListeners(product);
@@ -150,14 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderProduct(product) {
-        // Hide loading, show content
         productLoading.classList.add('hidden');
         productContent.classList.remove('hidden');
 
-        // Set page title
         document.title = `${product.title} | eShop`;
 
-        // Update product details
         productImage.src = product.image;
         productImage.alt = product.title;
         productName.textContent = product.title;
@@ -166,12 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
         productPrice.textContent = formatPrice(product.price);
         productDescription.textContent = product.description;
 
-        // Update breadcrumb
         productCategory.textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
         productCategory.href = `index.html?category=${product.category}`;
         productTitle.textContent = truncateText(product.title, 30);
 
-        // Update wishlist button state
         if (addToWishlistBtn) {
             const wishlist = getWishlistFromLocalStorage();
             const isInWishlist = wishlist.some(item => item.id === product.id);
@@ -180,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setupEventListeners(product) {
-        // Quantity controls
         decreaseQuantityBtn.addEventListener('click', () => {
             const currentValue = parseInt(quantityInput.value);
             if (currentValue > 1) {
@@ -193,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
             quantityInput.value = currentValue + 1;
         });
 
-        // Prevent manual input of invalid values
         quantityInput.addEventListener('change', () => {
             let value = parseInt(quantityInput.value);
             if (isNaN(value) || value < 1) {
@@ -202,19 +184,15 @@ document.addEventListener('DOMContentLoaded', () => {
             quantityInput.value = value;
         });
 
-        // Add to cart button
         addToCartBtn.addEventListener('click', () => {
             addToCart(product);
         });
 
-        // Add to wishlist button
         if (addToWishlistBtn) {
-            // Set initial state
             const wishlist = getWishlistFromLocalStorage();
             const isInWishlist = wishlist.some(item => item.id === product.id);
             updateWishlistButtonState(isInWishlist);
 
-            // Add event listener
             addToWishlistBtn.addEventListener('click', () => {
                 toggleWishlist(product);
             });
@@ -224,17 +202,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function addToCart(product) {
         const quantity = parseInt(quantityInput.value);
 
-        // Get current cart
         const cart = getCartFromLocalStorage();
 
-        // Check if product already in cart
         const existingItemIndex = cart.findIndex(item => item.id === product.id);
 
         if (existingItemIndex !== -1) {
-            // Update quantity if product already in cart
             cart[existingItemIndex].quantity += quantity;
         } else {
-            // Add new item to cart
             cart.push({
                 id: product.id,
                 title: product.title,
@@ -244,24 +218,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Save updated cart
         saveCartToLocalStorage(cart);
         updateCartCount();
 
-        // Change button text to "Added"
         const cartIcon = addToCartBtn.querySelector('svg').cloneNode(true);
         addToCartBtn.innerHTML = '';
         addToCartBtn.appendChild(cartIcon);
         addToCartBtn.appendChild(document.createTextNode(' Added'));
 
-        // Reset button text after 2 seconds
         setTimeout(() => {
             addToCartBtn.innerHTML = '';
             addToCartBtn.appendChild(cartIcon);
             addToCartBtn.appendChild(document.createTextNode(' Add to Cart'));
         }, 2000);
 
-        // Show success message
         showAddedToCartMessage();
     }
 
@@ -272,19 +242,15 @@ document.addEventListener('DOMContentLoaded', () => {
         switch (type) {
             case 'success':
                 bgColor = 'bg-green-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
                 break;
             case 'error':
                 bgColor = 'bg-red-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>';
                 break;
             case 'warning':
                 bgColor = 'bg-yellow-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>';
                 break;
             default:
                 bgColor = 'bg-blue-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
         }
 
         toast.className = `${bgColor} text-white p-3 rounded-md shadow-md flex items-center mb-3 animate-fade-in`;
@@ -295,7 +261,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         toastContainer.appendChild(toast);
 
-        // Remove toast after 3 seconds
         setTimeout(() => {
             toast.classList.add('animate-fade-out');
             setTimeout(() => {
@@ -315,12 +280,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const existingIndex = wishlist.findIndex(item => item.id === product.id);
 
         if (existingIndex !== -1) {
-            // Remove from wishlist
             wishlist.splice(existingIndex, 1);
             showToast(`${truncateText(product.title, 20)} removed from wishlist`, 'info');
             updateWishlistButtonState(false);
         } else {
-            // Add to wishlist
             wishlist.push({
                 id: product.id,
                 title: product.title,
@@ -342,7 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const heartIcon = addToWishlistBtn.querySelector('svg');
 
-        // Clear existing text content (excluding the SVG)
         const buttonText = addToWishlistBtn.childNodes;
         buttonText.forEach(node => {
             if (node.nodeType === Node.TEXT_NODE) {
@@ -358,7 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             addToWishlistBtn.setAttribute('title', 'Remove from wishlist');
 
-            // Add text after the SVG
             const textNode = document.createTextNode(' Remove from Wishlist');
             addToWishlistBtn.appendChild(textNode);
         } else {
@@ -369,7 +330,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             addToWishlistBtn.setAttribute('title', 'Add to wishlist');
 
-            // Add text after the SVG
             const textNode = document.createTextNode(' Add to Wishlist');
             addToWishlistBtn.appendChild(textNode);
         }

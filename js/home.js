@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const wishlistCount = document.getElementById('wishlist-count');
 
 
-    const API_URL = 'https://fakestoreapi.com';
 
     init();
     updateCartCount();
@@ -32,18 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createStarRating(rating, maxRating = 5) {
         let starsHTML = '';
-        const roundedRating = Math.round(rating * 2) / 2; // Round to nearest 0.5
+        const roundedRating = Math.round(rating * 2) / 2;
 
         for (let i = 1; i <= maxRating; i++) {
             if (i <= roundedRating) {
-                // Full star
-                starsHTML += `<svg class="w-4 h-4 star filled" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`;
+
             } else if (i - 0.5 <= roundedRating) {
-                // Half star
-                starsHTML += `<svg class="w-4 h-4 star filled" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" clip-path="inset(0 50% 0 0)"></path></svg>`;
+
             } else {
-                // Empty star
-                starsHTML += `<svg class="w-4 h-4 star" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`;
+
             }
         }
 
@@ -71,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
             cartCount.textContent = totalItems;
 
-            // Show/hide based on count
             if (totalItems === 0) {
                 cartCount.classList.add('hidden');
             } else {
@@ -96,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const totalItems = wishlistItems.length;
             wishlistCount.textContent = totalItems;
 
-            // Show/hide based on count
             if (totalItems === 0) {
                 wishlistCount.classList.add('hidden');
             } else {
@@ -110,11 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const existingIndex = wishlist.findIndex(item => item.id === product.id);
 
         if (existingIndex !== -1) {
-            // Remove from wishlist
             wishlist.splice(existingIndex, 1);
             showToast(`${truncateText(product.title, 20)} removed from wishlist`, 'info');
         } else {
-            // Add to wishlist
             wishlist.push({
                 id: product.id,
                 title: product.title,
@@ -127,7 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         saveWishlistToLocalStorage(wishlist);
         updateWishlistCount();
-        return existingIndex === -1; // Return true if added, false if removed
     }
 
     function showToast(message, type = 'info') {
@@ -137,19 +128,14 @@ document.addEventListener("DOMContentLoaded", () => {
         switch (type) {
             case 'success':
                 bgColor = 'bg-green-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
                 break;
             case 'error':
                 bgColor = 'bg-red-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>';
                 break;
             case 'warning':
                 bgColor = 'bg-yellow-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>';
                 break;
-            default: // info
                 bgColor = 'bg-blue-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
         }
 
         toast.className = `${bgColor} text-white p-3 rounded-md shadow-md flex items-center mb-3 animate-fade-in`;
@@ -160,7 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         toastContainer.appendChild(toast);
 
-        // Remove toast after 3 seconds
         setTimeout(() => {
             toast.classList.add('animate-fade-out');
             setTimeout(() => {
@@ -173,10 +158,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function init() {
         try {
-            // Fetch featured products (limited to 4)
             await loadFeaturedProducts();
 
-            // Fetch categories
             await loadCategories();
         } catch (error) {
             console.error('Initialization error:', error);
@@ -188,7 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             showFeaturedLoading();
 
-            // Fetch all products and select 4 random ones
             const products = await fetchFromAPI('/products');
             const featuredProducts = getRandomProducts(products, 4);
 
@@ -200,7 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function getRandomProducts(products, count) {
-        // Shuffle array and get first 'count' items
         return [...products]
             .sort(() => 0.5 - Math.random())
             .slice(0, count);
@@ -249,10 +230,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </a>
         `;
 
-        // Add event listener for Add to Cart button
         const addToCartBtn = card.querySelector('.add-to-cart-btn');
         addToCartBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent navigating to product page
             addToCart(product);
         });
 
@@ -282,9 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateCartCount();
     }
 
-    // Toast notification system
     function showToast(message, type = 'info') {
-        // Check if toast container exists, if not create it
         let toastContainer = document.getElementById('toast-container');
         if (!toastContainer) {
             toastContainer = document.createElement('div');
@@ -299,19 +276,14 @@ document.addEventListener("DOMContentLoaded", () => {
         switch (type) {
             case 'success':
                 bgColor = 'bg-green-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
                 break;
             case 'error':
                 bgColor = 'bg-red-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>';
                 break;
             case 'warning':
                 bgColor = 'bg-yellow-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>';
                 break;
-            default: // info
                 bgColor = 'bg-blue-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
         }
 
         toast.className = `${bgColor} text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2 transform transition-all duration-300 translate-y-0 opacity-0`;
@@ -324,12 +296,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         toastContainer.appendChild(toast);
 
-        // Animate in
         setTimeout(() => {
             toast.classList.remove('translate-y-0', 'opacity-0');
         }, 10);
 
-        // Remove after 3 seconds
         setTimeout(() => {
             toast.classList.add('translate-y-2', 'opacity-0');
             setTimeout(() => {
@@ -366,7 +336,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const card = document.createElement('div');
         card.className = 'bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300';
 
-        // Format category name for display
         const displayName = category.split(' ').map(word =>
             word.charAt(0).toUpperCase() + word.slice(1)
         ).join(' ');
@@ -374,7 +343,6 @@ document.addEventListener("DOMContentLoaded", () => {
         card.innerHTML = `
             <a href="index.html?category=${category}" class="block p-6 text-center">
                 <div class="text-indigo-600 mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                     </svg>
                 </div>
@@ -385,7 +353,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return card;
     }
 
-    // Loading and error state functions
     function showFeaturedLoading() {
         if (featuredLoadingElement) featuredLoadingElement.classList.remove('hidden');
         if (featuredProductsContainer) featuredProductsContainer.classList.add('hidden');

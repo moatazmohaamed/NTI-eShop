@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkoutBtn = document.getElementById('checkout-btn');
     const orderConfirmation = document.getElementById('order-confirmation');
     const closeConfirmation = document.getElementById('close-confirmation');
-    
+
     let toastContainer = document.getElementById('toast-container');
     if (!toastContainer) {
         toastContainer = document.createElement('div');
@@ -15,29 +15,29 @@ document.addEventListener('DOMContentLoaded', () => {
         toastContainer.className = 'fixed top-4 right-4 z-50 flex flex-col space-y-2';
         document.body.appendChild(toastContainer);
     }
-    
+
     setupEventListeners();
     renderCart();
     updateCartCount();
-    
+
     function formatPrice(price) {
         return `$${price.toFixed(2)}`;
     }
-    
+
     function truncateText(text, maxLength) {
         if (text.length <= maxLength) return text;
         return text.substring(0, maxLength) + '...';
     }
-    
+
     function getCartFromLocalStorage() {
         const cart = localStorage.getItem('cart');
         return cart ? JSON.parse(cart) : [];
     }
-    
+
     function saveCartToLocalStorage(cart) {
         localStorage.setItem('cart', JSON.stringify(cart));
     }
-    
+
     function updateCartCount() {
         const cartItems = getCartFromLocalStorage();
         const cartCount = document.getElementById('cart-count');
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
             cartCount.textContent = totalItems;
 
-            // Show/hide based on count
+
             if (totalItems === 0) {
                 cartCount.classList.add('hidden');
             } else {
@@ -54,31 +54,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-    
+
     function setupEventListeners() {
         if (checkoutBtn) {
             checkoutBtn.addEventListener('click', () => {
-                // Process order directly
                 const cart = getCartFromLocalStorage();
                 if (cart.length === 0) return;
-                
-                // Clear cart
+
                 saveCartToLocalStorage([]);
-                
-                // Show confirmation
+
                 if (orderConfirmation) {
                     orderConfirmation.classList.remove('hidden');
                 }
-                
-                // Show toast notification
+
                 showToast('Order placed successfully!', 'success');
-                
-                // Update UI
+
                 renderCart();
                 updateCartCount();
             });
         }
-        
+
         if (closeConfirmation) {
             closeConfirmation.addEventListener('click', () => {
                 if (orderConfirmation) {
@@ -87,10 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
-    
+
     function renderCart() {
         const cart = getCartFromLocalStorage();
-        
+
         if (cart.length === 0) {
             if (emptyCart) emptyCart.classList.remove('hidden');
             if (cartContent) cartContent.classList.add('hidden');
@@ -99,11 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (emptyCart) emptyCart.classList.add('hidden');
             if (cartContent) cartContent.classList.remove('hidden');
         }
-        
-        // Render cart items
+
         if (cartItems) {
             cartItems.innerHTML = '';
-            
+
             cart.forEach((item) => {
                 const cartItem = document.createElement('div');
                 cartItem.className = 'flex items-center py-4';
@@ -135,74 +129,71 @@ document.addEventListener('DOMContentLoaded', () => {
                         </button>
                     </div>
                 `;
-                
+
                 cartItems.appendChild(cartItem);
             });
-            
-            // Add event listeners to buttons
+
             document.querySelectorAll('.decrease-quantity').forEach(button => {
                 button.addEventListener('click', () => {
                     updateItemQuantity(button.dataset.id, -1);
                 });
             });
-            
+
             document.querySelectorAll('.increase-quantity').forEach(button => {
                 button.addEventListener('click', () => {
                     updateItemQuantity(button.dataset.id, 1);
                 });
             });
-            
+
             document.querySelectorAll('.remove-item').forEach(button => {
                 button.addEventListener('click', () => {
                     removeItem(button.dataset.id);
                 });
             });
         }
-        
-        // Update summary
+
         updateCartSummary();
     }
-    
+
     function updateItemQuantity(itemId, change) {
         const cart = getCartFromLocalStorage();
         const itemIndex = cart.findIndex(item => item.id.toString() === itemId.toString());
-        
+
         if (itemIndex === -1) return;
-        
+
         cart[itemIndex].quantity += change;
-        
+
         if (cart[itemIndex].quantity <= 0) {
-            // Remove item if quantity is 0 or less
             cart.splice(itemIndex, 1);
             showToast('Item removed from cart', 'info');
         } else {
             showToast(`Quantity updated to ${cart[itemIndex].quantity}`, 'info');
         }
-        
+
         saveCartToLocalStorage(cart);
         renderCart();
         updateCartCount();
     }
-    
+
     function removeItem(itemId) {
         const cart = getCartFromLocalStorage();
         const itemToRemove = cart.find(item => item.id.toString() === itemId.toString());
         const updatedCart = cart.filter(item => item.id.toString() !== itemId.toString());
-        
+
         saveCartToLocalStorage(updatedCart);
         renderCart();
         updateCartCount();
-        
+
         if (itemToRemove) {
             showToast(`${truncateText(itemToRemove.title, 20)} removed from cart`, 'info');
         }
     }
-    
+
     function showToast(message, type = 'info') {
         const toast = document.createElement('div');
         let bgColor, iconSvg;
-        
-        switch(type) {
+
+        switch (type) {
             case 'success':
                 bgColor = 'bg-green-500';
                 iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
@@ -219,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 bgColor = 'bg-blue-500';
                 iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
         }
-        
+
         toast.className = `${bgColor} text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2 transform transition-all duration-300 translate-y-0 opacity-0`;
         toast.innerHTML = `
             <div class="flex-shrink-0">
@@ -227,13 +218,13 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="flex-1">${message}</div>
         `;
-        
+
         toastContainer.appendChild(toast);
-        
+
         setTimeout(() => {
             toast.classList.remove('translate-y-0', 'opacity-0');
         }, 10);
-        
+
         setTimeout(() => {
             toast.classList.add('translate-y-2', 'opacity-0');
             setTimeout(() => {
@@ -243,11 +234,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 300);
         }, 3000);
     }
-    
+
     function updateCartSummary() {
         const cart = getCartFromLocalStorage();
         const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-        
+
         if (cartSubtotal) cartSubtotal.textContent = formatPrice(subtotal);
         if (cartTotal) cartTotal.textContent = formatPrice(subtotal);
     }

@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(toastContainer);
     }
 
-    const API_URL = 'https://fakestoreapi.com';
     let allProducts = [];
     let filteredProducts = [];
     let categories = [];
@@ -32,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartCount();
     updateWishlistCount();
 
-    // Utility Functions
+
     async function fetchFromAPI(endpoint) {
         try {
             const response = await fetch(`${API_URL}${endpoint}`);
@@ -52,18 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createStarRating(rating, maxRating = 5) {
         let starsHTML = '';
-        const roundedRating = Math.round(rating * 2) / 2; // Round to nearest 0.5
+        const roundedRating = Math.round(rating * 2) / 2;
 
         for (let i = 1; i <= maxRating; i++) {
             if (i <= roundedRating) {
-                // Full star
-                starsHTML += `<svg class="w-4 h-4 star filled" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`;
+
             } else if (i - 0.5 <= roundedRating) {
-                // Half star
-                starsHTML += `<svg class="w-4 h-4 star filled" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" clip-path="inset(0 50% 0 0)"></path></svg>`;
+
             } else {
-                // Empty star
-                starsHTML += `<svg class="w-4 h-4 star" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`;
+
             }
         }
 
@@ -102,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
             cartCount.textContent = totalItems;
 
-                    if (totalItems === 0) {
+            if (totalItems === 0) {
                 cartCount.classList.add('hidden');
             } else {
                 cartCount.classList.remove('hidden');
@@ -117,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const totalItems = wishlistItems.length;
             wishlistCount.textContent = totalItems;
 
-            // Show/hide based on count
+
             if (totalItems === 0) {
                 wishlistCount.classList.add('hidden');
             } else {
@@ -132,10 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         paginationContainer.innerHTML = '';
 
-        // Previous button
+
         const prevButton = document.createElement('button');
         prevButton.className = `pagination-button ${currentPage === 1 ? 'disabled' : ''}`;
-        prevButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>`;
         prevButton.disabled = currentPage === 1;
         prevButton.addEventListener('click', () => {
             if (currentPage > 1) {
@@ -144,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         paginationContainer.appendChild(prevButton);
 
-        // Page buttons
+
         const maxVisiblePages = 5;
         let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
         let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
@@ -165,10 +160,9 @@ document.addEventListener("DOMContentLoaded", () => {
             paginationContainer.appendChild(pageButton);
         }
 
-        // Next button
+
         const nextButton = document.createElement('button');
         nextButton.className = `pagination-button ${currentPage === totalPages ? 'disabled' : ''}`;
-        nextButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
         nextButton.disabled = currentPage === totalPages;
         nextButton.addEventListener('click', () => {
             if (currentPage < totalPages) {
@@ -178,10 +172,10 @@ document.addEventListener("DOMContentLoaded", () => {
         paginationContainer.appendChild(nextButton);
     }
 
-    // Main Functions
+
     async function init() {
         try {
-            // Show loading
+
             if (loadingElement) loadingElement.classList.remove('hidden');
             if (productsContainer) productsContainer.classList.add('hidden');
             if (noResultsElement) noResultsElement.classList.add('hidden');
@@ -193,13 +187,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             populateCategories();
 
-            // Check for URL parameters
+
             checkURLParameters();
 
             renderProducts();
             setupEventListeners();
 
-            // Hide loading
+
             if (loadingElement) loadingElement.classList.add('hidden');
             if (productsContainer) productsContainer.classList.remove('hidden');
         } catch (error) {
@@ -359,7 +353,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const truncatedTitle = truncateText(product.title, 50);
         const truncatedDescription = truncateText(product.description, 100);
 
-        // Check if product is in wishlist
         const wishlist = getWishlistFromLocalStorage();
         const isInWishlist = wishlist.some(item => item.id === product.id);
         const heartFill = isInWishlist ? 'currentColor' : 'none';
@@ -371,7 +364,6 @@ document.addEventListener("DOMContentLoaded", () => {
                      <img src="${product.image}" alt="${product.title}" class="product-image">
                      
                      <button class="wishlist-btn absolute top-2 right-2 p-1 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100 transition-all" data-id="${product.id}">
-                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ${heartClass}" fill="${heartFill}" viewBox="0 0 24 24" stroke="currentColor">
                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                      </svg>
                      </button>
@@ -396,16 +388,13 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-        // Add event listener for Add to Cart button
         const addToCartBtn = card.querySelector('.add-to-cart-btn');
         addToCartBtn.addEventListener('click', () => {
             addToCart(product);
         });
 
-        // Add event listener for Wishlist button
         const wishlistBtn = card.querySelector('.wishlist-btn');
         wishlistBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent navigating to product page
             toggleWishlist(product);
         });
 
@@ -444,11 +433,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const existingIndex = wishlist.findIndex(item => item.id === product.id);
 
         if (existingIndex !== -1) {
-            // Remove from wishlist
             wishlist.splice(existingIndex, 1);
             showToast(`${truncateText(product.title, 20)} removed from wishlist`, 'info');
         } else {
-            // Add to wishlist
             wishlist.push({
                 id: product.id,
                 title: product.title,
@@ -462,16 +449,13 @@ document.addEventListener("DOMContentLoaded", () => {
         saveWishlistToLocalStorage(wishlist);
         updateWishlistCount();
 
-        // Update UI for all instances of this product on the page
         document.querySelectorAll(`.wishlist-btn[data-id="${product.id}"]`).forEach(btn => {
             const heartIcon = btn.querySelector('svg');
             if (existingIndex !== -1) {
-                // Was in wishlist, now removed
                 heartIcon.setAttribute('fill', 'none');
                 heartIcon.classList.remove('text-red-500');
                 heartIcon.classList.add('text-gray-400');
             } else {
-                // Was not in wishlist, now added
                 heartIcon.setAttribute('fill', 'currentColor');
                 heartIcon.classList.add('text-red-500');
                 heartIcon.classList.remove('text-gray-400');
@@ -479,7 +463,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Toast notification system
     function showToast(message, type = 'info') {
         const toast = document.createElement('div');
         let bgColor, iconSvg;
@@ -487,19 +470,14 @@ document.addEventListener("DOMContentLoaded", () => {
         switch (type) {
             case 'success':
                 bgColor = 'bg-green-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
                 break;
             case 'error':
                 bgColor = 'bg-red-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>';
                 break;
             case 'warning':
                 bgColor = 'bg-yellow-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>';
                 break;
-            default: // info
                 bgColor = 'bg-blue-500';
-                iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
         }
 
         toast.className = `${bgColor} text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2 transform transition-all duration-300 translate-y-0 opacity-0`;
@@ -512,12 +490,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         toastContainer.appendChild(toast);
 
-        // Animate in
         setTimeout(() => {
             toast.classList.remove('translate-y-0', 'opacity-0');
         }, 10);
 
-        // Remove after 3 seconds
         setTimeout(() => {
             toast.classList.add('translate-y-2', 'opacity-0');
             setTimeout(() => {
