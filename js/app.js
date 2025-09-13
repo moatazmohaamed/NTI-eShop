@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const API_URL = 'https://fakestoreapi.com';
+
+
     const productsContainer = document.getElementById("products-container");
     const noResultsElement = document.getElementById("no-results");
     const errorMessageElement = document.getElementById("error-message");
