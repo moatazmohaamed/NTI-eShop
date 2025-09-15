@@ -8,6 +8,7 @@
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/darkMode.js" defer></script>
 </head>
 
 <body class="bg-gray-50">
@@ -15,14 +16,22 @@
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <a href="home.html" class="text-2xl font-bold text-indigo-600">eShop</a>
-                <nav class=" md:flex space-x-8">
+                <nav class=" md:flex space-x-3">
                     <a href="home.html" class="text-gray-800 hover:text-indigo-600">Home</a>
                     <a href="index.html" class="text-gray-800 hover:text-indigo-600">Products</a>
                 </nav>
                 <div class="flex items-center space-x-4">
+                    <button id="dark-mode-toggle"
+                        class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
                     <a href="wishlist.html" class="relative p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
@@ -30,8 +39,8 @@
                             class="absolute top-0 right-0 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
                     </a>
                     <a href="cart.html" class="relative p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
@@ -44,7 +53,7 @@
     </header>
 
     <main class="container mx-auto px-4 py-8">
-        
+
         <div class="bg-indigo-700 rounded-lg shadow-xl overflow-hidden mb-8">
             <div class="md:flex">
                 <div class="p-8 md:p-12 md:w-1/2 flex flex-col justify-center">
@@ -62,14 +71,14 @@
             </div>
         </div>
 
-        
+
         <div class="mb-12">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold">Featured Products</h2>
                 <a href="index.html" class="text-indigo-600 hover:text-indigo-800 font-medium">View All</a>
             </div>
 
-            
+
             <div id="featured-loading" class="py-12 flex justify-center">
                 <svg class="animate-spin h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24">
@@ -81,7 +90,7 @@
                 </svg>
             </div>
 
-            
+
             <div id="featured-error" class="py-12 text-center hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500 mx-auto mb-4" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
@@ -92,13 +101,13 @@
                 <p class="text-gray-500">Please try again later</p>
             </div>
 
-            
+
             <div id="featured-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             </div>
         </div>
         </div>
 
-        
+
         <div class="mb-12">
             <h2 class="text-2xl font-bold mb-6">Shop by Category</h2>
             <div id="categories-container" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
@@ -143,7 +152,7 @@
         </div>
     </footer>
 
-    
+
     <script src="../js/home.js"></script>
 </body>
 
